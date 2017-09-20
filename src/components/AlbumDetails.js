@@ -1,39 +1,58 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
 
-const AlbumDetails = props => {
-  const { textStyle } = styles;
+const AlbumDetails = ({ album }) => {
+  const { artist, thumbnail_image, title, image } = album;
+  const {
+    headerContentStyle,
+    thumbnailStyle,
+    thumbnailContainerStyle,
+    headerTextStyle,
+    imageStyle
+  } = styles;
 
   return (
     <Card>
       <CardSection>
-        <Text style={textStyle}>{props.album.title}</Text>
+        <View style={thumbnailContainerStyle}>
+          <Image style={thumbnailStyle} source={{ uri: thumbnail_image }} />
+        </View>
+        <View style={headerContentStyle}>
+          <Text style={headerTextStyle}>{title}</Text>
+          <Text>{artist}</Text>
+        </View>
+      </CardSection>
+      <CardSection>
+        <Image style={imageStyle} source={{ uri: image }} />
       </CardSection>
     </Card>
   );
 };
 
 const styles = {
-  textStyle: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
+  headerContentStyle: {
+    flexDirection: 'column',
+    justifyContent: 'space-around'
   },
-  viewStyle: {
-    flex: 1,
+  headerTextStyle: {
+    fontSize: 18
+  },
+  thumbnailStyle: {
+    height: 50,
+    width: 50
+  },
+  thumbnailContainerStyle: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    height: 60,
-    paddingTop: 15,
-    marginBottom: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    elevation: 2,
-    position: 'relative'
+    marginLeft: 10,
+    margiRight: 10
+  },
+  imageStyle: {
+    height: 300,
+    flex: 1,
+    width: null
   }
 };
 
